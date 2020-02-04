@@ -29,6 +29,12 @@ const MealsNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: colors.PRIMARY
       },
+      headerTitleStyle: {
+        fontFamily: 'open-sans-bold'
+      },
+      headerBackTitleStyle: {
+        fontFamily: 'open-sans'
+      },
       headerTintColor: 'white'
     },
     mode: 'card'
@@ -53,7 +59,7 @@ function getMealDetailsNavigationOptions(navData) {
 
   return {
     headerTitle: item.title,
-    headerRight: () => <FavoriteHeaderButton />,
+    headerRight: () => <FavoriteHeaderButton mealId={item.id}/>,
     headerStyle: {
       backgroundColor: 'white'
     },

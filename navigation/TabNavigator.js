@@ -24,7 +24,10 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: colors.ACCENT
+      activeTintColor: colors.ACCENT,
+      labelStyle: {
+        fontFamily: 'open-sans-bold'
+      }
     }
   }
 );

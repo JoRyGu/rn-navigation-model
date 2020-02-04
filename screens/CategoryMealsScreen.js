@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { MEALS } from '../data/dummy-data';
 import MealItem from '../components/MealItem';
 
 const CategoryMealsScreen = props => {
   const catId = props.navigation.getParam('categoryId');
-  const displayMeals = MEALS.filter(meal => meal.categoryIds.includes(catId));
+  const availableMeals = useSelector(state => state.meals.filteredMeals);
+  const displayMeals = availableMeals.filter(meal => meal.categoryIds.includes(catId));
 
   return (
     <View style={styles.screen}>

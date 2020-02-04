@@ -1,18 +1,23 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import MealItem from '../components/MealItem';
-import { MEALS } from '../data/dummy-data';
+import DefaultText from '../components/DefaultText';
 
 const FavoritesScreen = props => {
-  const displayMeals = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2');
+  const availableMeals = useSelector(({ meals }) => meals.favoriteMeals);
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        data={displayMeals}
-        renderItem={flatlistProps => <MealItem {...flatlistProps} navigate={props.navigation.navigate} />}
-        style={{ width: '100%' }}
-      />
+      {availableMeals.length > 0 ? (
+        <FlatList
+          data={availableMeals}
+          renderItem={flatlistProps => <MealItem {...flatlistProps} navigate={props.navigation.navigate} />}
+          style={{ width: '100%' }}
+        />
+      ) : (
+        <DefaultText style={styles.fallbackText}>No Favorites Saved!</DefaultText>
+      )}
     </View>
   );
 };
@@ -22,6 +27,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  fallbackText: {
+    fontFamily: 'open-sans-bold',
+    fontSize: 22
   }
 });
 
